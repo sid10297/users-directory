@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useFetchCurrentTime from '../../hooks/useFetchCurrentTime';
 import moment from 'moment-timezone';
+import styles from './index.module.css';
 
 const ShowCurrentTime = ({ region }) => {
   const { currentTime, loading, error } = useFetchCurrentTime(region);
@@ -54,10 +55,13 @@ const ShowCurrentTime = ({ region }) => {
   }
 
   return (
-    <div>
-      <div>Current Time: {formattedTime}</div>
-      <button onClick={isPaused ? handleStart : handlePause}>
-        {isPaused ? 'Start' : 'Pause'}
+    <div className={styles.timer_container}>
+      <p className={styles.timer}>Current Time: {formattedTime}</p>
+      <button
+        className={styles.btn}
+        onClick={isPaused ? handleStart : handlePause}
+      >
+        {isPaused ? 'START' : 'PAUSE'}
       </button>
     </div>
   );

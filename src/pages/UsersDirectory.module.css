@@ -1,0 +1,21 @@
+.header {
+  padding: 10px 12px;
+}
+
+.users {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userItem {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ddf2fd;
+  padding: 10px 12px;
+  margin: 10px 12px;
+  border-radius: 10px;
+}

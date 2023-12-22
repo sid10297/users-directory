@@ -7,6 +7,7 @@ import ShowCurrentTime from '../components/CurrentTime';
 import { UsersContext } from '../contexts/Users';
 import useFetchUser from '../hooks/useFetchUser';
 import Modal from '../components/Modal/Modal';
+import styles from './UserProfile.module.css';
 
 const UserProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,11 +50,13 @@ const UserProfile = () => {
   const displayUser = user || fetchedUser;
 
   return (
-    <div>
+    <>
       {/* TOP */}
-      <div>
+      <div className={styles.header}>
         {/* back btn */}
-        <button onClick={() => navigate('/')}>BACK</button>
+        <button className={styles.btn} onClick={() => navigate('/')}>
+          BACK
+        </button>
 
         {/* dropdown */}
         <Select
@@ -65,11 +68,11 @@ const UserProfile = () => {
         {/* timer */}
         <ShowCurrentTime region={selectedOption.value} />
       </div>
-      <div>
+      <div className={styles.user_details_container}>
         <div>
-          <h2>User Details</h2>
+          <h2 className={styles.user_detail_header}>User Details</h2>
         </div>
-        <div>
+        <div className={styles.user_detail_card}>
           {/* name */}
           {/* address */}
           {/* username */}
@@ -78,18 +81,22 @@ const UserProfile = () => {
           {/* phone */}
           {displayUser && (
             <>
-              <p>{displayUser.name}</p>
-              <p>{displayUser.address.city}</p>
-              <p>{displayUser.username}</p>
-              <p>{displayUser.company.catchPhrase}</p>
-              <p>{displayUser.email}</p>
-              <p>{displayUser.phone}</p>
+              <div>
+                <p>Name: {displayUser.name}</p>
+                <p>UserName: {displayUser.username}</p>
+                <p>Catch Phrase: {displayUser.company.catchPhrase}</p>
+              </div>
+              <div>
+                <p>Address: {displayUser.address.city}</p>
+                <p>Email: {displayUser.email}</p>
+                <p>Phone: {displayUser.phone}</p>
+              </div>
             </>
           )}
         </div>
       </div>
       {/* BOTTOM */}
-      <div>
+      <div className={styles.posts_container}>
         {/* posts.map(post => <div>{post}</div>) -> max 3 in a row */}
         {displayUser.posts.map((post) => (
           <div
@@ -102,7 +109,7 @@ const UserProfile = () => {
             }}
             key={post.id}
           >
-            <h2>{post.title}</h2>
+            <p style={{ fontWeight: 'bold' }}>{post.title}</p>
             <p>{post.body}</p>
           </div>
         ))}
@@ -112,7 +119,7 @@ const UserProfile = () => {
           <Modal content={modalContent} setIsOpen={setIsModalOpen} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 
