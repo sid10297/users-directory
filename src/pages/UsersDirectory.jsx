@@ -1,5 +1,31 @@
+import { useNavigate } from 'react-router-dom';
+import useFetchUsers from '../hooks/useFetchUsers';
+
 const UsersDirectory = () => {
-  return <div>UsersDirectory</div>;
+  const navigate = useNavigate();
+  const { users, loading, error } = useFetchUsers();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  return (
+    <div>
+      <h2>Users Directory</h2>
+      <div>
+        {users.map(({ id, name, posts }) => (
+          <div onClick={() => navigate(`/users/${id}`)} key={id}>
+            <p>Name: {name}</p>
+            <p>Posts: {posts.length}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default UsersDirectory;
