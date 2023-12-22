@@ -56,8 +56,9 @@ const ShowCurrentTime = ({ region }) => {
   return (
     <div>
       <div>Current Time: {formattedTime}</div>
-      <button onClick={handlePause}>Pause</button>
-      <button onClick={handleStart}>Start</button>
+      <button onClick={isPaused ? handleStart : handlePause}>
+        {isPaused ? 'Start' : 'Pause'}
+      </button>
     </div>
   );
 };
