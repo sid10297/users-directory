@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getUsers } from '../apis/users';
 import { getPosts } from '../apis/posts';
+import { UsersContext } from '../contexts/Users';
 
 const useFetchUsers = () => {
-  const [users, setUsers] = useState([]);
+  const { users, setUsers } = useContext(UsersContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,7 +28,7 @@ const useFetchUsers = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [setUsers]);
 
   return { users, loading, error };
 };
