@@ -1,7 +1,9 @@
+import AppRouter from './router/AppRouter';
+
 const App = () => {
   return (
     <div>
-      <h1>Users Directory</h1>
+      <AppRouter />
     </div>
   );
 };
