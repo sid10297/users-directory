@@ -13,14 +13,14 @@ const useFetchUser = (id) => {
           const userData = await getUser(id);
           const posts = await getPosts();
           // Also associate posts with users by filtering posts by userId and adding to user object.
-          const updatedUsersData = {
+          const updatedUserData = {
             ...userData,
             posts: posts.filter((post) => post.userId == id),
           };
-          setUser(updatedUsersData);
+          setUser(updatedUserData);
         } catch (error) {
-          console.error('Error fetching users:', error);
-          setError(error.message || 'Error fetching users');
+          console.error('Error fetching user:', error);
+          setError(error.message || 'Error fetching user');
         } finally {
           setLoading(false);
         }
