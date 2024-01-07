@@ -1,10 +1,12 @@
-import { useNavigate } from 'react-router-dom';
-import useFetchUsers from '../hooks/useFetchUsers';
-import styles from './UsersDirectory.module.css';
+import { useNavigate } from "react-router-dom";
+import useFetchUsers from "../hooks/useFetchUsers";
+import styles from "./UsersDirectory.module.css";
+import { useState } from "react";
 
 const UsersDirectory = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const { users, loading, error } = useFetchUsers();
+  const { users, loading, error, totalPages } = useFetchUsers(currentPage);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -13,6 +15,26 @@ const UsersDirectory = () => {
   if (error) {
     return <p>{error}</p>;
   }
+
+  const renderPagination = () => {
+    const pagination = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pagination.push(
+        <button
+          className={styles.btn}
+          style={{
+            margin: "0.5rem",
+            fontWeight: `${currentPage === i ? "bold" : ""}`,
+          }}
+          key={i}
+          onClick={() => setCurrentPage(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pagination;
+  };
 
   return (
     <>
@@ -31,6 +53,7 @@ const UsersDirectory = () => {
           </div>
         ))}
       </div>
+      <div>{renderPagination()}</div>
     </>
   );
 };
