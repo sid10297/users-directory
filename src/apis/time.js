@@ -1,17 +1,13 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export const getCurrentTime = async (...region) => {
-  let endpoint = 'http://worldtimeapi.org/api/timezone/';
-
-  if (region.length > 0) {
-    endpoint += region.join('/');
-  }
+  let endpoint = `http://worldtimeapi.org/api/timezone/${region}`
 
   try {
-    const response = await axios.get(endpoint.replace(/,/g, '/'));
-    return response.data;
+    const response = await axios.get(endpoint)
+    return response.data
   } catch (error) {
-    console.error('Error fetching current time:', error);
-    throw error;
+    console.error('Error fetching current time:', error)
+    throw error
   }
-};
+}
